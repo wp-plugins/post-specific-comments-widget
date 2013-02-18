@@ -13,13 +13,18 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 	Allows you to specify which post/page ID to display comments for in a widget. This can come in very handy when trying to showcase the comments from a single post or page, such as customer feedback or testimonials.
 
-	The ID number can be found by hovering over the post or page title while in the "All Pages" or "All Posts" list view Wordpress panels. The number will show itself after "post=" in your browser's add-on bar (usually at the lower left hand corner of the screen).
-
-	You don't have to limit the comments to one post or page, though. You can show all your posts/pages by typing in the word "all" (lowercase, three letters) instead of a post number. 
-
 	Allows you to list comments in default manner (by Author and Post Title) or by Author and a 60-character excerpt and ellipsis.
 
 	Thanks for downloading. I hope this can help you. If this really helped you, and especially if you can profit from it, consider sending a dollar or two my way! https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
+
+== Installation ==
+	Manual installation: Place plugin file in your plugins folder. Activate plugin in your Wordpress plugins panel.
+	
+	Edit settings under Appearance>Widgets (Hint: add the Post-Specific Comments widget to your sidebar).
+	
+	The ID number can be found by hovering over the post or page title while in the "All Pages" or "All Posts" list view Wordpress panels. The number will show itself after "post=" in your browser's add-on bar (usually at the lower left hand corner of the screen).
+
+	You don't have to limit the comments to one post or page, though. You can show all your posts/pages by typing in the word "all" (lowercase, three letters) instead of a post number. 
 
 
 == Frequently Asked Questions ==
