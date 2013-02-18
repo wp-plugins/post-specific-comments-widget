@@ -1,5 +1,5 @@
 === Post-Specific Comments Widget (PSCW) ===
-Contributors: Caroline Paquette
+Contributors: Little Package
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
 Tags: recent, post, comment, comments, widget, widgets, certain, specific, page
 Requires at least: 3.3
