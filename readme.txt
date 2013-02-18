@@ -1,12 +1,14 @@
 === Post-Specific Comments Widget (PSCW) ===
 Contributors: Caroline Paquette
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
-Tags: recent, post, comment, comments, widget, widgets, specific, page
+Tags: recent, post, comment, comments, widget, widgets, certain, specific, page
 Requires at least: 3.3
 Tested up to: 3.5.1
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+Allows you to specify which post/page ID to display comments for (or show them all). Simple options for display format as well.
 
 == Description ==
 

@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Post-Specific Comments Widget (PSCW)
-Description: Allows you to specify which post/page ID to display comments for. Can list comments by author name and 60-character excerpt instead of the default author/post title default if desired. 
+Description: Allows you to specify which post/page ID to display recent comments for (or show them all). Simple options for display format as well. 
 Author: Little Package
 Version: 1.0
 Author URI: http://little-package.com
