@@ -31,7 +31,7 @@ If you have questions, don't hesitate to ask. Email webmaster @ little - package
 
 == Screenshots ==
 
-PSCW-widget-screenshot.png
+PSCW-widget-settings.png
 
 == Changelog ==
 
