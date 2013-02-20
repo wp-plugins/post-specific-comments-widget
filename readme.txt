@@ -29,6 +29,9 @@ You don't have to limit the comments to one post or page, though. You can show a
 
 If you have questions, don't hesitate to ask. Email webmaster @ little - package . com
 
+== Screenshots ==
+
+/assets/PSCW-widget-screenshot.png
 
 == Changelog ==
 
