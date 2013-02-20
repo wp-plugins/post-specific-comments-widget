@@ -132,7 +132,7 @@ class Post_Specific_Comments extends WP_Widget {
 	function form( $instance ) {
 		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
 		$number = isset($instance['number']) ? absint($instance['number']) : 5;
-		$postID = isset($instance['postID']) ? $instance['postID'] : all;
+		$postID = isset($instance['postID']) ? $instance['postID'] : '';
 		$comment_format = isset($instance['comment_format']) ? $instance['comment_format'] : 'author-post';
 		$excerpt_length = isset($instance['excerpt_length']) ? $instance['excerpt_length'] : '60';
 		$excerpt_trail = isset($instance['excerpt_trail']) ? $instance['excerpt_trail'] : '...';
