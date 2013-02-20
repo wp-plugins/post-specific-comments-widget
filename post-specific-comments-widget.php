@@ -19,7 +19,7 @@ function pscw_init() {
 class Post_Specific_Comments extends WP_Widget {
 
 	function __construct() {
-		$widget_ops = array('classname' => 'widget_post_specific_comments', 'description' => __( 'The most recent comments' ) );
+		$widget_ops = array('classname' => 'widget_post_specific_comments', 'description' => __( 'The most recent comments for a specific post' ) );
 		parent::__construct('post-specific-comments', __('Post-Specific Comments'), $widget_ops);
 		$this->alt_option_name = 'widget_post_specific_comments';
 
@@ -44,7 +44,7 @@ class Post_Specific_Comments extends WP_Widget {
 	}
 
 	function widget( $args, $instance ) {
-		global $comments, $comment;
+		global $comments, $comment, $excerpt_length, $excerpt_tail;
 
 		$cache = wp_cache_get('widget_post_specific_comments', 'widget');
 
@@ -66,15 +66,23 @@ class Post_Specific_Comments extends WP_Widget {
 		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
  			$number = 5;
 
-		if ( empty( $instance['postID'] ) || ! $postID = $instance['postID'] )
- 			$postID = all;
-		
-		if ($instance['postID'] != "all") {
+		if ($instance['postID'] != '') {
 			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'post_id' => $postID, 'status' => 'approve', 'post_status' => 'publish') ) );
+		
+		} else if ( empty( $instance['postID'] ) || ! $postID = $instance['postID'] ) {
+
+			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'status' => 'approve', 'post_status' => 'publish') ) );
+
 		} else {
 			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'status' => 'approve', 'post_status' => 'publish') ) );
 		}
-		$excerptLen = 60;
+
+		if ( empty( $instance['excerpt_length'] ) || ! $excerpt_length = absint( $instance['excerpt_length'] ) )
+ 		$excerpt_length = 60;
+
+		if ( empty( $instance['excerpt_trail'] ) || ! $excerpt_trail = $instance['excerpt_trail'] )
+ 		$excerpt_trail = "...";
+
 		$output .= $before_widget;
 		if ( $title )
 			$output .= $before_title . $title . $after_title;
@@ -83,9 +91,9 @@ class Post_Specific_Comments extends WP_Widget {
 		if ( $comments ) {
 			foreach ( (array) $comments as $comment) {
 				$aRecentComment = get_comment($comment->comment_ID);
-				$aRecentCommentTxt = trim( mb_substr( strip_tags( apply_filters( 'comment_text', $aRecentComment->comment_content )), 0, $excerptLen ));
-				if(strlen($aRecentComment->comment_content)>$excerptLen){
-					$aRecentCommentTxt .= "...";
+				$aRecentCommentTxt = trim( mb_substr( strip_tags( apply_filters( 'comment_text', $aRecentComment->comment_content )), 0, $excerpt_length ));
+				if(strlen($aRecentComment->comment_content)>$excerpt_length){
+					$aRecentCommentTxt .= $excerpt_trail;
 				}
 	
 				if ($instance['comment_format'] == "author-post") {
@@ -108,8 +116,10 @@ class Post_Specific_Comments extends WP_Widget {
 		$instance = $old_instance;
 		$instance['title'] = strip_tags($new_instance['title']);
 		$instance['number'] = absint( $new_instance['number'] );
-		$instance['postID'] = $new_instance['postID'];
+		$instance['postID'] = absint( $new_instance['postID'] );
 		$instance['comment_format'] = $new_instance['comment_format'];
+		$instance['excerpt_length'] = absint( $new_instance['excerpt_length'] );
+		$instance['excerpt_trail'] = strip_tags( $new_instance['excerpt_trail'] );
 
 		$this->flush_widget_cache();
 
@@ -125,13 +135,14 @@ class Post_Specific_Comments extends WP_Widget {
 		$number = isset($instance['number']) ? absint($instance['number']) : 5;
 		$postID = isset($instance['postID']) ? $instance['postID'] : all;
 		$comment_format = isset($instance['comment_format']) ? $instance['comment_format'] : 'author-post';
+		$excerpt_length = isset($instance['excerpt_length']) ? $instance['excerpt_length'] : '60';
+		$excerpt_trail = isset($instance['excerpt_trail']) ? $instance['excerpt_trail'] : '...';
 
-	//	The expression (expr1) ? (expr2) : (expr3) evaluates to expr2 if expr1 evaluates to TRUE, and expr3 if expr1 evaluates to FALSE.
 ?>
 		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:'); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
-		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of comments to show:'); ?></label>
+		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of Comments to Show:'); ?></label>
 		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
 
 		<p><label for="<?php echo $this->get_field_id('postID'); ?>"><?php _e('Post/Page ID Number:'); ?></label>
@@ -144,10 +155,15 @@ class Post_Specific_Comments extends WP_Widget {
 			</fieldset>
 		</p>
 
+		<p><label for="<?php echo $this->get_field_id('excerpt_length'); ?>"><?php _e('Excerpt Length:'); ?></label>
+            	<input id="<?php echo $this->get_field_id('excerpt_length'); ?>" name="<?php echo $this->get_field_name('excerpt_length'); ?>" type="text" value="<?php echo $excerpt_length; ?>" size="3" />
+            	<p><label for="<?php echo $this->get_field_id('excerpt_trail'); ?>"><?php _e('Excerpt Trailing:'); ?></label>
+            	<input style="width: 100px;" id="<?php echo $this->get_field_id('excerpt_trail'); ?>" name="<?php echo $this->get_field_name('excerpt_trail'); ?>" type="text" value="<?php echo $excerpt_trail; ?>" size="3" />
+            	</p>
+
 <?php
 	}
 }
-
 
 
 ?>
