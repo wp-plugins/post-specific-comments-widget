@@ -2,6 +2,7 @@
 Contributors: Caroline Paquette
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
 Tags: certain, comment, comments, excerpt, page, post, recent, widget, widgets, specific
+Requires at least: 3.4
 Tested up to: 3.5.1
 Stable tag: 1.0.1
 License: GPLv2 or later
@@ -29,6 +30,14 @@ You don't have to limit the comments to one post or page, though. You can show a
 
 If you have questions, don't hesitate to ask. Email webmaster @ little - package . com
 
+== Screenshots ==
+
+1. Screenshot of the menu settings
+
+== Upgrade Notice ==
+
+= 1.0.1 = 
+Fixes a minor security-related bug. Recommend immediate update. Added feature: excerpt display options. Now use the number 0 instead of the word "all" to show all posts/pages if not showing just one post/page.
 
 == Changelog ==
 
