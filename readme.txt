@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: certain, comment, comments, excerpt, page, post, recent, widget, widgets, specific
 Requires at least: 3.4
 Tested up to: 3.5.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -39,6 +39,9 @@ If you have questions, don't hesitate to ask. Email webmaster @ little - package
 = 1.0.1 = 
 Fixes a minor security-related bug. Recommend immediate update. Added feature: excerpt display options. Now use the number 0 instead of the word "all" to show all posts/pages if not showing just one post/page.
 
+= 1.0.2 = 
+Fixed issue with Post ID not working in some cases.
+
 == Changelog ==
 
 = 1.0 February 14 2013 =
@@ -46,3 +49,6 @@ Fixes a minor security-related bug. Recommend immediate update. Added feature: e
 
 = 1.0.1 February 19 2013 =
 * Added menu option to set excerpt length and trailing character.
+
+= 1.0.2 February 20 2013 =
+* Fixed issue with Post ID not working in some cases

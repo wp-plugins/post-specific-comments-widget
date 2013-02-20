@@ -3,7 +3,7 @@
 Plugin Name: Post-Specific Comments Widget (PSCW)
 Description: Allows you to specify which post/page ID to display recent comments for (or show them all). Simple options for display format as well. 
 Author: Little Package
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://little-package.com
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
 Plugin URI: 
@@ -66,22 +66,20 @@ class Post_Specific_Comments extends WP_Widget {
 		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
  			$number = 5;
 
-		if ($instance['postID'] != '') {
-			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'post_id' => $postID, 'status' => 'approve', 'post_status' => 'publish') ) );
+		if ( empty( $instance['postID'] ) || ! $postID = $instance['postID'] )
+ 			$postID = 0;
 		
-		} else if ( empty( $instance['postID'] ) || ! $postID = $instance['postID'] ) {
-
-			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'status' => 'approve', 'post_status' => 'publish') ) );
-
+		if ($instance['postID'] != "0") {
+			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'post_id' => $postID, 'status' => 'approve', 'post_status' => 'publish') ) );
 		} else {
 			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'status' => 'approve', 'post_status' => 'publish') ) );
 		}
-
+		
 		if ( empty( $instance['excerpt_length'] ) || ! $excerpt_length = absint( $instance['excerpt_length'] ) )
- 		$excerpt_length = 60;
+ 			$excerpt_length = 60;
 
 		if ( empty( $instance['excerpt_trail'] ) || ! $excerpt_trail = $instance['excerpt_trail'] )
- 		$excerpt_trail = "...";
+ 			$excerpt_trail = "...";
 
 		$output .= $before_widget;
 		if ( $title )
@@ -97,11 +95,12 @@ class Post_Specific_Comments extends WP_Widget {
 				}
 	
 				if ($instance['comment_format'] == "author-post") {
-				$output .=  '<li class="recentcomments">' . /* translators: comments widget: 1: comment author, 2: post link */ sprintf(_x('%1$s on %2$s', 'widgets'), get_comment_author_link(), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="' . $classes . '">' . get_the_title($comment->comment_post_ID) . '</a>') . '</li>';
-					}
+					$output .=  '<li class="recentcomments">' . /* translators: comments widget: 1: comment author, 2: post link */ sprintf(_x('%1$s on %2$s', 'widgets'), get_comment_author_link(), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="' . $classes . '">' . get_the_title($comment->comment_post_ID) . '</a>') . '</li>';
+				}
+
 				if ($instance['comment_format'] == "author-excerpt") {
-				$output .= '<li class="recentcomments">' . /* translators: comments widget: 1: comment author, 2: post link */ sprintf(_x('<span class="recentcommentsauthor">%1$s</span> said %2$s', 'widgets'), get_comment_author_link(), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '">' . $aRecentCommentTxt . '</a>') . '</li>';
-					}
+					$output .= '<li class="recentcomments">' . /* translators: comments widget: 1: comment author, 2: post link */ sprintf(_x('<span class="recentcommentsauthor">%1$s</span> said %2$s', 'widgets'), get_comment_author_link(), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '">' . $aRecentCommentTxt . '</a>') . '</li>';	
+				}
 			}
  		}
 		$output .= '</ul>';
