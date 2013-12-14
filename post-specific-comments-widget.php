@@ -4,7 +4,7 @@ Plugin Name: Post-Specific Comments Widget (PSCW)
 Description: Allows you to specify which post/page ID to display recent comments for (or show them all). Simple options for display format as well. 
 Author: Little Package
 Version: 1.0.2
-Author URI: http://little-package.com
+Author URI: http://cap.little-package.com/pscw
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
 Plugin URI: 
 License: GPLv2 or later
@@ -65,6 +65,10 @@ class Post_Specific_Comments extends WP_Widget {
 
 		if ( empty( $instance['number'] ) || ! $number = absint( $instance['number'] ) )
  			$number = 5;
+		else if ( $number < 1 )
+			$number = 1;
+		else if ( $number >100 )
+			$number = 100;
 
 		if ( empty( $instance['postID'] ) || ! $postID = $instance['postID'] )
  			$postID = 0;
@@ -74,9 +78,13 @@ class Post_Specific_Comments extends WP_Widget {
 		} else {
 			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'status' => 'approve', 'post_status' => 'publish') ) );
 		}
-		
+
 		if ( empty( $instance['excerpt_length'] ) || ! $excerpt_length = absint( $instance['excerpt_length'] ) )
  			$excerpt_length = 60;
+		else if ( $excerpt_length < 1 )
+			$excerpt_length = 1;
+		else if ( $excerpt_length >500 )
+			$excerpt_length = 500;
 
 		if ( empty( $instance['excerpt_trail'] ) || ! $excerpt_trail = $instance['excerpt_trail'] )
  			$excerpt_trail = "...";
@@ -142,7 +150,8 @@ class Post_Specific_Comments extends WP_Widget {
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
 		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of Comments to Show:'); ?></label>
-		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
+		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /><br />
+		<small><?php _e('(at most 100)'); ?></small></p>
 
 		<p><label for="<?php echo $this->get_field_id('postID'); ?>"><?php _e('Post/Page ID Number:'); ?></label>
 		<input id="<?php echo $this->get_field_id('postID'); ?>" name="<?php echo $this->get_field_name('postID'); ?>" type="text" value="<?php echo $postID; ?>" size="6" /></p>
@@ -155,7 +164,9 @@ class Post_Specific_Comments extends WP_Widget {
 		</p>
 
 		<p><label for="<?php echo $this->get_field_id('excerpt_length'); ?>"><?php _e('Excerpt Length:'); ?></label>
-            	<input id="<?php echo $this->get_field_id('excerpt_length'); ?>" name="<?php echo $this->get_field_name('excerpt_length'); ?>" type="text" value="<?php echo $excerpt_length; ?>" size="3" />
+            	<input id="<?php echo $this->get_field_id('excerpt_length'); ?>" name="<?php echo $this->get_field_name('excerpt_length'); ?>" type="text" value="<?php echo $excerpt_length; ?>" size="3" /><br />
+		<small><?php _e('(between 1-500 characters)'); ?></small>
+		</p>
             	<p><label for="<?php echo $this->get_field_id('excerpt_trail'); ?>"><?php _e('Excerpt Trailing:'); ?></label>
             	<input style="width: 100px;" id="<?php echo $this->get_field_id('excerpt_trail'); ?>" name="<?php echo $this->get_field_name('excerpt_trail'); ?>" type="text" value="<?php echo $excerpt_trail; ?>" size="3" />
             	</p>

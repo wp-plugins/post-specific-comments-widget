@@ -3,7 +3,7 @@ Contributors: Little Package
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
 Tags: certain, comment, comments, excerpt, page, post, recent, widget, widgets, specific
 Requires at least: 3.4
-Tested up to: 3.5.1
+Tested up to: 3.8
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -45,7 +45,7 @@ Fixed issue with Post ID not working in some cases.
 == Changelog ==
 
 = 1.0 February 14 2013 =
-* First version, adapted from "Recent comments widget with comment excerpts" and "HTML Classified Recent Posts & Comments Widgets"
+* First version, adapted from "Recent comments widget with comment excerpts," "Wizzart Recent Comments, and "HTML Classified Recent Posts & Comments Widgets"
 
 = 1.0.1 February 19 2013 =
 * Added menu option to set excerpt length and trailing character.
