@@ -34,7 +34,7 @@ If you have questions, don't hesitate to ask. Email webmaster @ little - package
 == Changelog ==
 
 = 1.0 February 14 2013 =
-* First version, adapted from "Recent comments widget with comment excerpts" and "HTML Classified Recent Posts & Comments Widgets"
+* First version, adapted from "Recent comments widget with comment excerpts," "Wizzart Recent Comments, and "HTML Classified Recent Posts & Comments Widgets"
 
 = 1.0.1 February 19 2013 =
 * Added menu option to set excerpt length and trailing character.
