@@ -1,10 +1,10 @@
 === Post-Specific Comments Widget (PSCW) ===
-Contributors: Little Package
+Contributors: Caroline Paquette
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
-Tags: comment, excerpt, feedback, guest, page, post, recent, testimonial, widget, specific
+Tags: comment, excerpt, feedback, free, guest, page, post, recent, testimonial, widget, specific
 Requires at least: 3.4
 Tested up to: 3.8
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
