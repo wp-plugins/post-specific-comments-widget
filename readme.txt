@@ -1,7 +1,7 @@
 === Post-Specific Comments Widget (PSCW) ===
 Contributors: Little Package
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
-Tags: certain, comment, comments, excerpt, page, post, recent, widget, widgets, specific
+Tags: comment, excerpt, feedback, guest, page, post, recent, testimonial, widget, specific
 Requires at least: 3.4
 Tested up to: 3.8
 Stable tag: 1.0.2
