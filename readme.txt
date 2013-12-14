@@ -53,3 +53,7 @@ Fixed issue with Post ID not working in some cases.
 
 = 1.0.2 February 20 2013 =
 * Fixed issue with Post ID not working in some cases
+
+= 1.0.3 December 13 2013 =
+* Tested with Wordpress 3.8
+* Helpful screenshot added
