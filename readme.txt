@@ -33,7 +33,7 @@ If you have questions, don't hesitate to ask. Email webmaster @ little - package
 == Screenshots ==
 
 1. Screenshot of the menu settings
-2. Screenshot of how to find post/page ID number
+2. Screenshot of how to find post/page ID number. In this case the ID is 1696 when hovering over post “Change Password.”
 
 == Upgrade Notice ==
 
