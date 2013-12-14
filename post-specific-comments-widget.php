@@ -4,7 +4,7 @@ Plugin Name: Post-Specific Comments Widget (PSCW)
 Description: Allows you to specify which post/page ID to display recent comments for (or show them all). Simple options for display format as well. 
 Author: Little Package
 Version: 1.0.2
-Author URI: http://little-package.com
+Author URI: http://cap.little-package.com/pscw
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
 Plugin URI: 
 License: GPLv2 or later
