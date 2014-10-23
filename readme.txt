@@ -3,8 +3,8 @@ Contributors: Caroline Paquette
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
 Tags: comment, excerpt, feedback, free, guest, page, post, recent, testimonial, widget, specific
 Requires at least: 3.4
-Tested up to: 3.8
-Stable tag: 1.0.3
+Tested up to: 4.0
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -57,3 +57,6 @@ Fixed issue with Post ID not working in some cases.
 = 1.0.3 December 13 2013 =
 * Tested with Wordpress 3.8
 * Helpful screenshot added
+
+= 1.0.4 Oct 22 2014 =
+* Tested with Wordpress 4.0
