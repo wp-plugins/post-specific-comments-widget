@@ -3,9 +3,9 @@
 Plugin Name: Post-Specific Comments Widget (PSCW)
 Description: Allows you to specify which post/page ID to display recent comments for (or show them all). Simple options for display format as well. 
 Author: Caroline Paquette
-Version: 1.0.5
+Version: 1.0.6
 Requires at least: 3.4
-Tested up to: 4.0
+Tested up to: 4.2.1
 Author URI: http://cap.little-package.com/pscw
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PB2CFX8H4V49L
 Plugin URI: http://littlepackage.github.io/post-specific-comments-widget
@@ -100,7 +100,7 @@ class Post_Specific_Comments extends WP_Widget {
 		if ( $title )
 			$output .= $before_title . $title . $after_title;
 
-		$output .= '<ul id="recentcomments" class="pscw">';
+		$output .= '<ul id="pscw-comments" class="pscw">';
 		if ( $comments ) {
 			foreach ( (array) $comments as $comment) {
 				$aRecentComment = get_comment($comment->comment_ID);

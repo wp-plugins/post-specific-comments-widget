@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: comment, excerpt, feedback, free, guest, page, post, recent, testimonial, widget, specific
 Requires at least: 3.4
 Tested up to: 4.0
-Stable tag: 1.0.5
+Stable tag: 1.0.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -67,3 +67,6 @@ Localization and main class fixes
 = 1.0.5 Oct 30 2014 =
 * Language files added and l10n code fixes
 * Main class fixes
+
+= 1.0.6 May 3 2015 =
+* ID tag fix to prevent page ID duplicates
