@@ -3,8 +3,8 @@ Contributors: littlepackage
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PB2CFX8H4V49L
 Tags: comment, excerpt, feedback, free, guest, page, post, recent, testimonial, widget, specific
 Requires at least: 3.4
-Tested up to: 4.2.1
-Stable tag: 1.0.6
+Tested up to: 4.3
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Allows you to specify which post/page ID to display comments for in a widget. This can come in very handy when trying to showcase the comments from a single post or page, such as customer feedback or testimonials.
 
-Allows you to list comments in default manner (by Author and Post Title) or by Author and a variable-character excerpt and ellipsis (or other chosen trailing characters).
+Allows you to list comments in default manner (by Author and Post Title) or by Author and a variable-character excerpt and ellipsis (or other chosen trailing characters). Two new post formats to version 1.1 are (Post Title) - (Excerpt) and (Excerpt) - (Author).
 
 Thanks for downloading. I hope this can help you. If this really helped you, and especially if you can profit from it, consider sending a dollar or two my way! Paypal link at right.
 
@@ -70,3 +70,8 @@ Localization and main class fixes
 
 = 1.0.6 May 3 2015 =
 * ID tag fix to prevent page ID duplicates
+
+= 1.1 August 7 2015 =
+* Wordpress 4.3 ready
+* ID tag unique identifier for HTML5
+* Two additional formats, title/except and excerpt/author
