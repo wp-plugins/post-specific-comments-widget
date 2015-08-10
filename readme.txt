@@ -1,10 +1,10 @@
 === Post-Specific Comments Widget (PSCW) ===
-Contributors: Caroline Paquette
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=FK28Y6ZBG93X6
+Contributors: littlepackage
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PB2CFX8H4V49L
 Tags: comment, excerpt, feedback, free, guest, page, post, recent, testimonial, widget, specific
 Requires at least: 3.4
-Tested up to: 4.0
-Stable tag: 1.0.4
+Tested up to: 4.3
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,9 +12,9 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Allows you to specify which post/page ID to display comments for in a widget. This can come in very handy when trying to showcase the comments from a single post or page, such as customer feedback or testimonials.
 
-Allows you to list comments in default manner (by Author and Post Title) or by Author and a variable-character excerpt and ellipsis (or other chosen trailing characters).
+Allows you to list comments in default manner (by Author and Post Title) or by Author and a variable-character excerpt and ellipsis (or other chosen trailing characters). Two new post formats to version 1.1 are (Post Title) - (Excerpt) and (Excerpt) - (Author).
 
-Thanks for downloading. I hope this can help you. If this really helped you, and especially if you can profit from it, consider sending a dollar or two my way!
+Thanks for downloading. I hope this can help you. If this really helped you, and especially if you can profit from it, consider sending a dollar or two my way! Paypal link at right.
 
 == Installation ==
 
@@ -28,7 +28,13 @@ You don't have to limit the comments to one post or page, though. You can show a
 
 == Frequently Asked Questions ==
 
-If you have questions, don't hesitate to ask. Email webmaster @ little - package . com
+If you have questions, don't hesitate to ask.
+
+= How do I use the shortcodes? = 
+
+If you want to customize the way your comment is printed out, you can use the following shortcodes as placeholders for the intended output: <code>[AUTHOR], [TITLE\], [EXCERPT\], [DATE\].</code>
+
+So for example, if you choose the "other" format, you could then enter "Comment by ~[AUTHOR]~ on [DATE]" and the plugin would magically replace the shortcodes with the author name/link, surrounded by tildes/swiggles, and then the date. 
 
 == Screenshots ==
 
@@ -42,6 +48,15 @@ Fixes a minor security-related bug. Recommend immediate update. Added feature: e
 
 = 1.0.2 = 
 Fixed issue with Post ID not working in some cases.
+
+= 1.0.5 = 
+Localization and main class fixes
+
+= 1.1 = 
+Wordpress 4.3 ready
+
+= 1.2 = 
+Shortcodes added!
 
 == Changelog ==
 
@@ -60,3 +75,18 @@ Fixed issue with Post ID not working in some cases.
 
 = 1.0.4 Oct 22 2014 =
 * Tested with Wordpress 4.0
+
+= 1.0.5 Oct 30 2014 =
+* Language files added and l10n code fixes
+* Main class fixes
+
+= 1.0.6 May 3 2015 =
+* ID tag fix to prevent page ID duplicates
+
+= 1.1.0 August 7 2015 =
+* Wordpress 4.3 ready
+* ID tag unique identifier for HTML5
+* Two additional formats, title/except and excerpt/author
+
+= 1.2.0 August 10 2015 =
+* Shortcodes for custom comment output
