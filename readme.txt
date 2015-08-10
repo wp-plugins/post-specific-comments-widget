@@ -32,7 +32,7 @@ If you have questions, don't hesitate to ask.
 
 = How do I use the shortcodes? = 
 
-If you want to customize the way your comment is printed out, you can use the following shortcodes as placeholders for the intended output: <code>[AUTHOR], [TITLE\], [EXCERPT\], [DATE\].</code>
+If you want to customize the way your comment is printed out, you can use the following shortcodes as placeholders for the intended output: [AUTHOR], [TITLE], [EXCERPT], [DATE].
 
 So for example, if you choose the "other" format, you could then enter "Comment by ~[AUTHOR]~ on [DATE]" and the plugin would magically replace the shortcodes with the author name/link, surrounded by tildes/swiggles, and then the date. 
 
