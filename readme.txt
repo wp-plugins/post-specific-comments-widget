@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: comment, excerpt, feedback, free, guest, page, post, recent, testimonial, widget, specific
 Requires at least: 3.4
 Tested up to: 4.3
-Stable tag: 1.1
+Stable tag: 1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,6 +30,12 @@ You don't have to limit the comments to one post or page, though. You can show a
 
 If you have questions, don't hesitate to ask.
 
+= How do I use the shortcodes? = 
+
+If you want to customize the way your comment is printed out, you can use the following shortcodes as placeholders for the intended output: <code>[AUTHOR], [TITLE\], [EXCERPT\], [DATE\].</code>
+
+So for example, if you choose the "other" format, you could then enter "Comment by ~[AUTHOR]~ on [DATE]" and the plugin would magically replace the shortcodes with the author name/link, surrounded by tildes/swiggles, and then the date. 
+
 == Screenshots ==
 
 1. Screenshot of the menu settings
@@ -45,6 +51,12 @@ Fixed issue with Post ID not working in some cases.
 
 = 1.0.5 = 
 Localization and main class fixes
+
+= 1.1 = 
+Wordpress 4.3 ready
+
+= 1.2 = 
+Shortcodes added!
 
 == Changelog ==
 
@@ -71,7 +83,10 @@ Localization and main class fixes
 = 1.0.6 May 3 2015 =
 * ID tag fix to prevent page ID duplicates
 
-= 1.1 August 7 2015 =
+= 1.1.0 August 7 2015 =
 * Wordpress 4.3 ready
 * ID tag unique identifier for HTML5
 * Two additional formats, title/except and excerpt/author
+
+= 1.2.0 August 10 2015 =
+* Shortcodes for custom comment output

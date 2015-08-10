@@ -1,33 +1,37 @@
 <?php
 /*
-Plugin Name: Post-Specific Comments Widget (PSCW)
-Description: Allows you to specify which post/page ID to display recent comments for (or show them all). Simple options for display format as well. 
-Author: Caroline Paquette
-Version: 1.1
-Requires at least: 3.4
-Tested up to: 4.3
-Author URI: http://cap.little-package.com/pscw
-Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PB2CFX8H4V49L
-Plugin URI: http://littlepackage.github.io/post-specific-comments-widget
-License: GPLv2 or later
-*/
+ * Plugin Name: Post-Specific Comments Widget (PSCW)
+ * Plugin URI: http://littlepackage.github.io/post-specific-comments-widget
+ * Description: Allows you to specify which post/page ID to display recent comments for (or show them all). Simple options for display format and display shortcodes for customization as well. 
+ * Version: 1.2
+ * Author: Caroline Paquette
+ * Author URI: http://www.little-package.com/pscw
+ * Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=PB2CFX8H4V49L
+ * License: GPLv3 or later
+ * License URI: http://www.opensource.org/licenses/gpl-license.php
+ */
 
 add_action( 'widgets_init', 'pscw_init' );
 
 function pscw_init() {
-	register_widget( 'Post_Specific_Comments' );
+	register_widget( 'Post_Specific_Comments_Widget' );
 }
 
-if ( ! class_exists( 'Post_Specific_Comments' ) ) :
+if ( ! class_exists( 'Post_Specific_Comments_Widget' ) ) :
 
-class Post_Specific_Comments extends WP_Widget {
+class Post_Specific_Comments_Widget extends WP_Widget {
 
 	public function __construct() {
-		$widget_ops = array('classname' => 'widget_post_specific_comments', 'description' => __( 'The most recent comments for a specific post', 'pscw' ) );
-		parent::__construct('post-specific-comments', __('Post-Specific Comments', 'pscw' ), $widget_ops);
+		$widget_ops = array(
+			'classname' => 'widget_post_specific_comments',
+			'description' => __( 'The most recent comments for a specific post', 'pscw' ) 
+		);
+
+		parent::__construct( 'post-specific-comments', __('Post-Specific Comments', 'pscw' ), $widget_ops );
+
 		$this->alt_option_name = 'widget_post_specific_comments';
 
-		if ( is_active_widget(false, false, $this->id_base) )
+		if ( is_active_widget( false, false, $this->id_base ) )
 			add_action( 'wp_head', array($this, 'recent_comments_style') );
 
 		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
@@ -112,6 +116,8 @@ class Post_Specific_Comments extends WP_Widget {
 
 				$aRecentCommentID = get_comment( $comment->comment_post_ID );
 				$aRecentCommentTitle = get_the_title( $aRecentCommentID );
+				$aRecentCommentAuthor = get_comment_author_link();
+				$aRecentCommentDate = get_comment_date( null, $comment->comment_ID );
 
 				$aRecentCommentTxt = trim( mb_substr( strip_tags( apply_filters( 'comment_text', $aRecentComment->comment_content )), 0, $excerpt_length ));
 				if(strlen($aRecentComment->comment_content)>$excerpt_length){
@@ -119,19 +125,28 @@ class Post_Specific_Comments extends WP_Widget {
 				}
 	
 				if ( $instance['comment_format'] == "author-post" ) {
-					$output .=  '<li class="recentcomments pscw-recentcomments">' . sprintf(__('%1$s on %2$s', 'pscw'), get_comment_author_link(), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link ' . $classes . '">' . get_the_title($comment->comment_post_ID) . '</a>') . '</li>';
+					$output .=  '<li class="recentcomments pscw-recentcomments">' . sprintf(__('%1$s on %2$s', 'pscw'), $aRecentCommentAuthor, '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link ' . $classes . '">' . get_the_title($comment->comment_post_ID) . '</a>') . '</li>';
 				}
 
 				if ( $instance['comment_format'] == "author-excerpt" ) {
-					$output .= '<li class="recentcomments pscw-recentcomments">' . sprintf(__( '<span class="recentcommentsauthor">%1$s</span> said %2$s', 'pscw' ), get_comment_author_link(), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link">' . $aRecentCommentTxt . '</a>') . '</li>';	
+					$output .= '<li class="recentcomments pscw-recentcomments">' . sprintf(__( '<span class="recentcommentsauthor">%1$s</span> said %2$s', 'pscw' ), $aRecentCommentAuthor, '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link">' . $aRecentCommentTxt . '</a>') . '</li>';	
 				}
 
-				if ( $instance['comment_format'] == "title-excerpt" ) {
-					$output .= '<li class="recentcomments pscw-recentcomments">' . sprintf(__( '<span class="recentcommentstitle">%1$s</span> - %2$s', 'pscw' ), $aRecentCommentTitle, '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link">' . $aRecentCommentTxt . '</a>') . '</li>';	
+				if ( $instance['comment_format'] == "excerpt" ) {
+					$output .= '<li class="recentcomments pscw-recentcomments"><a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link">' . $aRecentCommentTxt . '</a></li>';	
 				}
 
 				if ( $instance['comment_format'] == "excerpt-author" ) {
-					$output .= '<li class="recentcomments pscw-recentcomments">' . sprintf(__( '<span class="recentcommentstitle">%1$s</span> - %2$s', 'pscw' ), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link">' . $aRecentCommentTxt . '</a>', get_comment_author_link() ) . '</li>';	
+					$output .= '<li class="recentcomments pscw-recentcomments">' . sprintf(__( '<span class="recentcommentstitle">%1$s</span> - %2$s', 'pscw' ), '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link">' . $aRecentCommentTxt . '</a>', $aRecentCommentAuthor ) . '</li>';	
+				}
+				
+				if ( $instance['comment_format'] == "other" ) {
+					$other_input = empty( $instance['other_input'] ) ? '' : esc_html( strip_tags( $instance['other_input'] ) );
+
+					$aRecentCommentTitle = '<span class="recentcommentstitle">' . $aRecentCommentTitle . '</span>';
+					$aRecentCommentTxt = '<a href="' . esc_url( get_comment_link($comment->comment_ID) ) . '" class="pscw-link">' . $aRecentCommentTxt . '</a>';
+					$output .= '<li class="recentcomments pscw-recentcomments">' . preg_replace( array( '/\[AUTHOR]/','/\[TITLE\]/','/\[EXCERPT\]/','/\[DATE\]/' ), array( $aRecentCommentAuthor, $aRecentCommentTitle, $aRecentCommentTxt, $aRecentCommentDate ), $other_input ) . '</li>';
+
 				}
 			}
  		}
@@ -149,6 +164,7 @@ class Post_Specific_Comments extends WP_Widget {
 		$instance['number'] = absint( $new_instance['number'] );
 		$instance['postID'] = absint( $new_instance['postID'] );
 		$instance['comment_format'] = $new_instance['comment_format'];
+		$instance['other_input'] = $new_instance['other_input'];
 		$instance['excerpt_length'] = absint( $new_instance['excerpt_length'] );
 		$instance['excerpt_trail'] = strip_tags( $new_instance['excerpt_trail'] );
 
@@ -166,6 +182,8 @@ class Post_Specific_Comments extends WP_Widget {
 		$number = isset($instance['number']) ? absint($instance['number']) : 5;
 		$postID = isset($instance['postID']) ? $instance['postID'] : '';
 		$comment_format = isset($instance['comment_format']) ? $instance['comment_format'] : 'author-post';
+		$other_input = isset($instance['other_input']) ? $instance['other_input'] : '';
+
 		$excerpt_length = isset($instance['excerpt_length']) ? $instance['excerpt_length'] : '60';
 		$excerpt_trail = isset($instance['excerpt_trail']) ? $instance['excerpt_trail'] : '...';
 
@@ -183,8 +201,11 @@ class Post_Specific_Comments extends WP_Widget {
 			<fieldset>
 				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "author-post") echo "checked"; ?> value="author-post"><label for="author-post"> (Author) on (Post Title)</label></p>
 				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "author-excerpt") echo "checked"; ?> value="author-excerpt"><label for="author-excerpt"> (Author) says (Excerpt)</label></p>
-				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "title-excerpt") echo "checked"; ?> value="title-excerpt"><label for="title-excerpt"> (Title) - (Excerpt)</label></p>
 				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "excerpt-author") echo "checked"; ?> value="excerpt-author"><label for="excerpt-author"> (Excerpt) - Author</label></p>
+				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "excerpt") echo "checked"; ?> value="excerpt"><label for="excerpt"> (Excerpt)</label></p>
+				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "other") echo "checked"; ?> value="other"><label for="other"> Other:</label></p>
+				<p style="text-indent: 30px"><input type="text" name="<?php echo $this->get_field_name('other_input'); ?>" value="<?php if ( isset($other_input) ) { echo $other_input; } ?>"><br /><label for="other_input"> Use text &amp; shortcodes (no CSS/HTML)</label></p>
+
 			</fieldset>
 		</p>
 
