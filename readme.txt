@@ -12,7 +12,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 Allows you to specify which post/page ID to display comments for in a widget. This can come in very handy when trying to showcase the comments from a single post or page, such as customer feedback or testimonials.
 
-Allows you to list comments in default manner (by Author and Post Title) or by Author and a variable-character excerpt and ellipsis (or other chosen trailing characters). Two new post formats to version 1.1 are (Post Title) - (Excerpt) and (Excerpt) - (Author).
+Allows you to list comments in default manner (by Author and Post Title) or by Author and a variable-character excerpt and ellipsis (or other chosen trailing characters). Two new post formats to version 1.1 are (Excerpt) and (Excerpt) - (Author). Version 1.2 added shortcodes so users can create their own formats!
 
 Thanks for downloading. I hope this can help you. If this really helped you, and especially if you can profit from it, consider sending a dollar or two my way! Paypal link at right.
 
