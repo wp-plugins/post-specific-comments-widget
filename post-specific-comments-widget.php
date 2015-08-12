@@ -2,7 +2,7 @@
 /*
  * Plugin Name: Post-Specific Comments Widget (PSCW)
  * Plugin URI: http://littlepackage.github.io/post-specific-comments-widget
- * Description: Allows you to specify which post/page ID to display recent comments for (or show them all). Simple options for display format and display shortcodes for customization as well. 
+ * Description: A widget that displays recent comments from a specific post or page ID. Display format is highly customizable with shortcodes and unique CSS tags. 
  * Version: 1.2
  * Author: Caroline Paquette
  * Author URI: http://www.little-package.com/pscw
@@ -32,10 +32,10 @@ class Post_Specific_Comments_Widget extends WP_Widget {
 		$this->alt_option_name = 'widget_post_specific_comments';
 
 		if ( is_active_widget( false, false, $this->id_base ) )
-			add_action( 'wp_head', array($this, 'recent_comments_style') );
+			add_action( 'wp_head', array( $this, 'recent_comments_style' ) );
 
-		add_action( 'comment_post', array(&$this, 'flush_widget_cache') );
-		add_action( 'transition_comment_status', array($this, 'flush_widget_cache') );
+		add_action( 'comment_post', array( &$this, 'flush_widget_cache' ) );
+		add_action( 'transition_comment_status', array( $this, 'flush_widget_cache' ) );
 		add_action( 'plugins_loaded',	array( $this, 'pscw_lang' ));
 
 	}
@@ -44,25 +44,32 @@ class Post_Specific_Comments_Widget extends WP_Widget {
 	 * l10n
 	 **/
 	public function pscw_lang() {
+	
 		load_plugin_textdomain( 'pscw', false, dirname( plugin_basename( __FILE__ ) ) . '/lang/' );
+
 	}
 
 	/**
 	 * CSS
 	 **/
 	public function recent_comments_style() {
+	
 		if ( ! current_theme_supports( 'widgets' ) || ! apply_filters( 'show_recent_comments_widget_style', true, $this->id_base ) )
 			return;
 		?>
 		<style type="text/css">.recentcomments a{display:inline !important;padding:0 !important;margin:0 !important;}</style>
 	<?php
+	
 	}
 
 	public function flush_widget_cache() {
-		wp_cache_delete('widget_post_specific_comments', 'widget');
+	
+		wp_cache_delete( 'widget_post_specific_comments', 'widget' );
+
 	}
 
 	public function widget( $args, $instance ) {
+	
 		global $comments, $comment;
 
 		$cache = wp_cache_get( 'widget_post_specific_comments', 'widget' );
@@ -78,7 +85,7 @@ class Post_Specific_Comments_Widget extends WP_Widget {
 			return;
 		}
 
- 		extract($args, EXTR_SKIP);
+ 		extract( $args, EXTR_SKIP );
  		$output = '';
 		$title = apply_filters( 'widget_title', empty( $instance['title'] ) ? __( 'Recent Comments', 'pscw' ) : $instance['title'], $instance, $this->id_base );
 
@@ -88,7 +95,7 @@ class Post_Specific_Comments_Widget extends WP_Widget {
 		if ( empty( $instance['postID'] ) || ! $postID = $instance['postID'] )
  			$postID = 0;
 		
-		if ($instance['postID'] != "0") {
+		if ( $instance['postID'] != "0" ) {
 			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'post_id' => $postID, 'status' => 'approve', 'post_status' => 'publish') ) );
 		} else {
 			$comments = get_comments( apply_filters( 'widget_comments_args', array( 'number' => $number, 'status' => 'approve', 'post_status' => 'publish') ) );
@@ -120,7 +127,7 @@ class Post_Specific_Comments_Widget extends WP_Widget {
 				$aRecentCommentDate = get_comment_date( null, $comment->comment_ID );
 
 				$aRecentCommentTxt = trim( mb_substr( strip_tags( apply_filters( 'comment_text', $aRecentComment->comment_content )), 0, $excerpt_length ));
-				if(strlen($aRecentComment->comment_content)>$excerpt_length){
+				if ( strlen( $aRecentComment->comment_content ) > $excerpt_length ){
 					$aRecentCommentTxt .= $excerpt_trail;
 				}
 	
@@ -156,11 +163,13 @@ class Post_Specific_Comments_Widget extends WP_Widget {
 		echo $output;
 		$cache[$args['widget_id']] = $output;
 		wp_cache_set('widget_post_specific_comments', $cache, 'widget');
+
 	}
 
 	public function update( $new_instance, $old_instance ) {
+	
 		$instance = $old_instance;
-		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['title'] = strip_tags( $new_instance['title'] );
 		$instance['number'] = absint( $new_instance['number'] );
 		$instance['postID'] = absint( $new_instance['postID'] );
 		$instance['comment_format'] = $new_instance['comment_format'];
@@ -171,54 +180,55 @@ class Post_Specific_Comments_Widget extends WP_Widget {
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
-		if ( isset($alloptions['widget_post_specific_comments']) )
-			delete_option('widget_post_specific_comments');
+		if ( isset( $alloptions['widget_post_specific_comments'] ) )
+			delete_option( 'widget_post_specific_comments' );
 
 		return $instance;
+		
 	}
 
 	public function form( $instance ) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
-		$number = isset($instance['number']) ? absint($instance['number']) : 5;
-		$postID = isset($instance['postID']) ? $instance['postID'] : '';
-		$comment_format = isset($instance['comment_format']) ? $instance['comment_format'] : 'author-post';
-		$other_input = isset($instance['other_input']) ? $instance['other_input'] : '';
+	
+		$title = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : '';
+		$number = isset( $instance['number'] ) ? absint( $instance['number'] ) : 5;
+		$postID = isset( $instance['postID'] ) ? $instance['postID'] : '';
+		$comment_format = isset( $instance['comment_format'] ) ? $instance['comment_format'] : 'author-post';
+		$other_input = isset( $instance['other_input'] ) ? $instance['other_input'] : '';
 
-		$excerpt_length = isset($instance['excerpt_length']) ? $instance['excerpt_length'] : '60';
-		$excerpt_trail = isset($instance['excerpt_trail']) ? $instance['excerpt_trail'] : '...';
-
-?>
-		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'pscw'); ?></label>
+		$excerpt_length = isset( $instance['excerpt_length'] ) ? $instance['excerpt_length'] : '60';
+		$excerpt_trail = isset( $instance['excerpt_trail'] ) ? $instance['excerpt_trail'] : '...';
+		?>
+		
+		<p><label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title', 'pscw' ); ?></label>
 		<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" /></p>
 
-		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of Comments to Show', 'pscw' ); ?>:</label>
+		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e( 'Number of Comments to Show', 'pscw' ); ?>:</label>
 		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
 
-		<p><label for="<?php echo $this->get_field_id('postID'); ?>"><?php _e('Post/Page ID Number', 'pscw' ); ?>:</label>
+		<p><label for="<?php echo $this->get_field_id('postID'); ?>"><?php _e( 'Post/Page ID Number', 'pscw' ); ?>:</label>
 		<input id="<?php echo $this->get_field_id('postID'); ?>" name="<?php echo $this->get_field_name('postID'); ?>" type="text" value="<?php echo $postID; ?>" size="6" /></p>
 
 		<p><legend><?php _e('Comment Format', 'pscw'); ?>:</legend>
 			<fieldset>
-				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "author-post") echo "checked"; ?> value="author-post"><label for="author-post"> (Author) on (Post Title)</label></p>
-				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "author-excerpt") echo "checked"; ?> value="author-excerpt"><label for="author-excerpt"> (Author) says (Excerpt)</label></p>
-				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "excerpt-author") echo "checked"; ?> value="excerpt-author"><label for="excerpt-author"> (Excerpt) - Author</label></p>
-				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "excerpt") echo "checked"; ?> value="excerpt"><label for="excerpt"> (Excerpt)</label></p>
-				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if (isset($comment_format) && $comment_format == "other") echo "checked"; ?> value="other"><label for="other"> Other:</label></p>
+				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if ( isset( $comment_format ) && $comment_format == "author-post" ) echo "checked"; ?> value="author-post"><label for="author-post"> (Author) on (Post Title)</label></p>
+				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if ( isset( $comment_format ) && $comment_format == "author-excerpt" ) echo "checked"; ?> value="author-excerpt"><label for="author-excerpt"> (Author) says (Excerpt)</label></p>
+				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if ( isset( $comment_format ) && $comment_format == "excerpt-author" ) echo "checked"; ?> value="excerpt-author"><label for="excerpt-author"> (Excerpt) - Author</label></p>
+				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if ( isset( $comment_format ) && $comment_format == "excerpt" ) echo "checked"; ?> value="excerpt"><label for="excerpt"> (Excerpt)</label></p>
+				<p style="text-indent: 20px"><input type="radio" name="<?php echo $this->get_field_name('comment_format'); ?>" <?php if ( isset( $comment_format ) && $comment_format == "other" ) echo "checked"; ?> value="other"><label for="other"> Other:</label></p>
 				<p style="text-indent: 30px"><input type="text" name="<?php echo $this->get_field_name('other_input'); ?>" value="<?php if ( isset($other_input) ) { echo $other_input; } ?>"><br /><label for="other_input"> Use text &amp; shortcodes (no CSS/HTML)</label></p>
 
 			</fieldset>
 		</p>
 
-		<p><label for="<?php echo $this->get_field_id('excerpt_length'); ?>"><?php _e( 'Excerpt Length', 'pscw' ); ?>:</label>
-            	<input id="<?php echo $this->get_field_id('excerpt_length'); ?>" name="<?php echo $this->get_field_name('excerpt_length'); ?>" type="text" value="<?php echo $excerpt_length; ?>" size="3" />
-            	<p><label for="<?php echo $this->get_field_id('excerpt_trail'); ?>"><?php _e( 'Excerpt Trailing', 'pscw' ); ?>:</label>
-            	<input style="width: 100px;" id="<?php echo $this->get_field_id('excerpt_trail'); ?>" name="<?php echo $this->get_field_name('excerpt_trail'); ?>" type="text" value="<?php echo $excerpt_trail; ?>" size="3" />
+		<p><label for="<?php echo $this->get_field_id( 'excerpt_length' ); ?>"><?php _e( 'Excerpt Length', 'pscw' ); ?>:</label>
+            	<input id="<?php echo $this->get_field_id( 'excerpt_length' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_length' ); ?>" type="text" value="<?php echo $excerpt_length; ?>" size="3" />
+            	<p><label for="<?php echo $this->get_field_id( 'excerpt_trail' ); ?>"><?php _e( 'Excerpt Trailing', 'pscw' ); ?>:</label>
+            	<input style="width: 100px;" id="<?php echo $this->get_field_id( 'excerpt_trail' ); ?>" name="<?php echo $this->get_field_name( 'excerpt_trail' ); ?>" type="text" value="<?php echo $excerpt_trail; ?>" size="3" />
             	</p>
 
-<?php
-	}
-}
+	<?php } // End form()
+	
+} // End class post_Specific_Comments_Widget
 
-endif;
-
+endif; // End if ( class_exists() )
 ?>

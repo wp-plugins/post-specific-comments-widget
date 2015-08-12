@@ -5,14 +5,14 @@ Tags: comment, excerpt, feedback, free, guest, page, post, recent, testimonial, 
 Requires at least: 3.4
 Tested up to: 4.3
 Stable tag: 1.2
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: http://www.opensource.org/licenses/gpl-license.php
 
 == Description ==
 
 Allows you to specify which post/page ID to display comments for in a widget. This can come in very handy when trying to showcase the comments from a single post or page, such as customer feedback or testimonials.
 
-Allows you to list comments in default manner (by Author and Post Title) or by Author and a variable-character excerpt and ellipsis (or other chosen trailing characters). Two new post formats to version 1.1 are (Post Title) - (Excerpt) and (Excerpt) - (Author).
+Allows you to list comments in default manner (by Author and Post Title) or by Author and a variable-character excerpt and ellipsis (or other chosen trailing characters). Two new post formats to version 1.1 are (Excerpt) and (Excerpt) - (Author). Version 1.2 added shortcodes so users can create their own formats!
 
 Thanks for downloading. I hope this can help you. If this really helped you, and especially if you can profit from it, consider sending a dollar or two my way! Paypal link at right.
 
@@ -32,7 +32,7 @@ If you have questions, don't hesitate to ask.
 
 = How do I use the shortcodes? = 
 
-If you want to customize the way your comment is printed out, you can use the following shortcodes as placeholders for the intended output: <code>[AUTHOR], [TITLE\], [EXCERPT\], [DATE\].</code>
+If you want to customize the way your comment is printed out, you can use the following shortcodes as placeholders for the intended output: [AUTHOR], [TITLE], [EXCERPT], [DATE].
 
 So for example, if you choose the "other" format, you could then enter "Comment by ~[AUTHOR]~ on [DATE]" and the plugin would magically replace the shortcodes with the author name/link, surrounded by tildes/swiggles, and then the date. 
 
@@ -90,3 +90,6 @@ Shortcodes added!
 
 = 1.2.0 August 10 2015 =
 * Shortcodes for custom comment output
+
+= 1.2.1 
+* 
