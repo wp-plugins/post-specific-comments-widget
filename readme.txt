@@ -5,8 +5,8 @@ Tags: comment, excerpt, feedback, free, guest, page, post, recent, testimonial, 
 Requires at least: 3.4
 Tested up to: 4.3
 Stable tag: 1.2
-License: GPLv2 or later
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License: GPLv3 or later
+License URI: http://www.opensource.org/licenses/gpl-license.php
 
 == Description ==
 
@@ -90,3 +90,6 @@ Shortcodes added!
 
 = 1.2.0 August 10 2015 =
 * Shortcodes for custom comment output
+
+= 1.2.1 
+* 
